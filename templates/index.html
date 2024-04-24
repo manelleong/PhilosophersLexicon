@@ -2,35 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Philosopher's Lexicon</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <script src="{{ url_for('static', filename='js/scripts.js') }}" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkbox Form</title>
 </head>
 <body>
-
-<section id="chinese-philosophers">
-    <h2>Chinese Philosophers</h2>
-    <!-- Add checkboxes for Chinese philosophers -->
-    <input type="checkbox" id="confucius" name="philosopher" value="Confucius">
-    <label for="confucius">Confucius</label>
-    <!-- More checkboxes -->
-</section>
-
-<section id="western-philosophers">
-    <h2>Western Philosophers</h2>
-    <!-- Add checkboxes for Western philosophers -->
-    <input type="checkbox" id="plato" name="philosopher" value="Plato">
-    <label for="plato">Plato</label>
-    <!-- More checkboxes -->
-</section>
-
-<section id="visualization">
-    <h2>Visualization</h2>
-    <button id="generate-graph">Generate Graph</button>
-    <div id="graph-container">
-        <!-- The graph will be inserted here -->
-    </div>
-</section>
-
+    <form action="/submit" method="post">
+        <input type="checkbox" name="confucius" value="confucius"> Kong Qiu (Confucius)<br>
+        <input type="checkbox" name="nietzsche" value="nietzsche"> Friedrich Nietzsche<br>
+        <input type="checkbox" name="kant" value="kant"> Immanuel Kant<br>
+        <button type="submit">Submit</button>
+    </form>
 </body>
 </html>
