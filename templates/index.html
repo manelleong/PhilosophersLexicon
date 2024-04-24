@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkbox Form</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
     <form action="/submit" method="post">
@@ -12,5 +13,10 @@
         <input type="checkbox" name="kant" value="kant"> Immanuel Kant<br>
         <button type="submit">Submit</button>
     </form>
+    <div id="graph"></div>
+    <script>
+        var graphJSON = '{{ graphJSON | safe }}';
+        Plotly.newPlot('graph', JSON.parse(graphJSON));
+    </script>
 </body>
 </html>
