@@ -1,5 +1,3 @@
-
-
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 from sklearn.decomposition import PCA
@@ -12,6 +10,7 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objs as go
 
+
 def chunkify(text, length):
     tokenized_text = text.split(" ")
     loops = len(tokenized_text)//length
@@ -20,7 +19,17 @@ def chunkify(text, length):
 
     return chunks
 
-def makeGraph(selected_philosophers):
+# this version of chunkify returns the same number of chunks regardless of text length
+def evenchunkify(text, chunk_count):
+    tokenized_text = text.split(" ")
+    
+    words_per_chunk = len(tokenized_text) // chunk_count
+
+    chunks = [" ".join(tokenized_text[i * words_per_chunk:(i + 1) * words_per_chunk]) for i in range(chunk_count)]
+
+    return chunks
+
+def makeGraph(selected_philosophers, selected_settings):
     stop_words = set(stopwords.words('english'))
 
     authors = []
@@ -34,13 +43,17 @@ def makeGraph(selected_philosophers):
         filtered_words = [word for word in words if word not in stop_words]
         text = " ".join(filtered_words)
 
-        chunks = chunkify(text, 1000)
+        if len(selected_settings) > 2: # we are using even chunking
+            chunks = evenchunkify(text, int(selected_settings[1]))
+        else:
+            chunks = chunkify(text, int(selected_settings[1]))
+
         texts.extend(chunks)
 
         for _ in range(len(chunks)):
             authors.append(philosopher)
 
-    vectorizer = TfidfVectorizer(use_idf = False, max_features = 30)
+    vectorizer = TfidfVectorizer(use_idf = False, max_features = int(selected_settings[0]))
 
     frequencies = vectorizer.fit_transform(texts)
 
@@ -54,8 +67,6 @@ def makeGraph(selected_philosophers):
 
     loadings = pca.components_
     vocabulary = vectorizer.get_feature_names_out()
-
-    print(vocabulary)
 
     loadings_data = {"vocab" : [], "x" : [], "y" : []}
 
@@ -75,4 +86,12 @@ def makeGraph(selected_philosophers):
     fig.add_trace(go.Scatter(x = loadings_df["x"], y = loadings_data["y"], mode = "text", 
                          text = loadings_df["vocab"]))
     
+    fig.update_layout(
+    xaxis_title=None,
+    yaxis_title=None,
+    legend_title_text = 'Legend'
+    )
+
+    fig.data[-1].name = 'Words'
+
     return fig

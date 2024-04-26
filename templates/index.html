@@ -3,14 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkbox Form</title>
+    <title>Philosopher's Lexicon</title>
+    <link rel="stylesheet" href="static/css/style.css">
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
     <form action="/submit" method="post">
-        <input type="checkbox" name="confucius" value="confucius"> Kong Qiu (Confucius)<br>
-        <input type="checkbox" name="nietzsche" value="nietzsche"> Friedrich Nietzsche<br>
-        <input type="checkbox" name="kant" value="kant"> Immanuel Kant<br>
+        <div class = "container">
+            <div class = "Philosopher-group" id="western">
+                <h3>Western Philosophers</h3>
+                <input type="checkbox" name="nietzsche" value="nietzsche"> Friedrich Nietzsche<br>
+                <input type="checkbox" name="kant" value="kant"> Immanuel Kant<br>
+                <input type="checkbox" name="plato" value="plato"> Aristocles (Plato)<br>
+            </div>
+
+            <div class = "Philosopher-group" id="chinese">
+                <h3>Chinese Philosophers</h3>
+                <input type="checkbox" name="confucius" value="confucius"> Kong Qiu (Confucius)<br>
+                <input type="checkbox" name="laozi" value="laozi"> Laozi (Lao Tzu)<br>
+                <input type="checkbox" name="sunzi" value="sunzi"> Sunzi (Sun Tzu)<br>
+            </div>
+
+            <div class = "Philosopher-group" id="Settings">
+                <h3>Settings</h3>
+                <label for="wordcount">Word Count:</label>
+                <input type="text" id="wordcount" name="wordcount" value="25" style="width:50px"><br>
+
+                <label for="chunkcount">Chunk Count/Size:</label>
+                <input type="text" id="chunkcount" name="chunkcount" value="100" style="width:50px"><br>
+
+                <input type="checkbox" name="evenchunking" value="evenchunking" checked> Even Chunking*<br>
+            </div>
+
+        </div>
         <button type="submit">Submit</button>
     </form>
     <div id="graph"></div>
@@ -18,5 +43,14 @@
         var graphJSON = '{{ graphJSON | safe }}';
         Plotly.newPlot('graph', JSON.parse(graphJSON));
     </script>
+
+    <footer>
+        <p>* With 'Even Chunking' enabled, the graph will plot an equal number of points for each philosopher (determined by the 'Chunk Count'). 
+            The actual number of words each point represents will vary between philosophers, reflecting the size 
+            of their collected works. Conversely, with 'Even Chunking' disabled,
+            each point on the graph represents a fixed number of words ('Chunk Size'), resulting in a variable number of points 
+            for each philosopher based also on the word count of their collected works.
+        </p>
+    </footer>
 </body>
 </html>
