@@ -6,7 +6,7 @@ import urllib.request
 # {'philosopher_name' : ['url1', 'url2', ...]}
 urlsDict = {
             'nietzsche':['51356/pg51356-images.html', '19322/pg19322-images.html', '38145/pg38145-images.html', '52263/pg52263-images.html'],
-            'confucious':['4094/pg4094-images.html', '3100/pg3100-images.html', '24055/pg24055-images.html', '3330/pg3330-images.html'],
+            'confucius':['4094/pg4094-images.html', '3100/pg3100-images.html', '24055/pg24055-images.html', '3330/pg3330-images.html'],
             'kant':['52821/pg52821-images.html', '48433/pg48433-images.html', '4280/pg4280-images.html', '50922/pg50922-images.html']
             }
 

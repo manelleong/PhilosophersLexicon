@@ -1,7 +1,4 @@
 from flask import Flask, render_template, request
-import plotly.express as px
-import plotly
-import json
 from services import topic_modeling
 
 app = Flask(__name__)
