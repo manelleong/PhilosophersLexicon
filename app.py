@@ -19,7 +19,7 @@ def submit():
     print(selected_settings)
 
     valid_input = True
-    
+
     if not selected_philosophers:
         valid_input = False
     if 'evenchunking' in selected_settings:
@@ -31,10 +31,9 @@ def submit():
     if not valid_input:
         return render_template('index.html')
         
-
-    fig = topic_modeling.makeGraph(selected_philosophers, selected_settings)
+    fig, vocab = topic_modeling.makeGraph(selected_philosophers, selected_settings)
     graphjson = fig.to_json()
 
-    return render_template('index.html', graphJSON = graphjson)
+    return render_template('index.html', graphJSON = graphjson, vocabulary = f"Vocabulary: [{vocab}]")
 
 app.run(host = "0.0.0.0", port = 80)

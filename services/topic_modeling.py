@@ -10,6 +10,8 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objs as go
 
+import json
+
 
 def chunkify(text, length):
     tokenized_text = text.split(" ")
@@ -94,4 +96,16 @@ def makeGraph(selected_philosophers, selected_settings):
 
     fig.data[-1].name = 'Words'
 
-    return fig
+    vocabulary = [f"'{word}'" for word in vocabulary]
+
+    return fig, ", ".join(vocabulary)
+
+def getWordData(selected_philosophers):
+    output = ""
+    for philosopher in selected_philosophers:
+        with open(f'data/{philosopher}/{philosopher}.json', 'r') as file:
+            json_object = json.load(file)
+
+        output += f"{philosopher}: word count: {json_object['word_count']} unique word count: {json_object['unique_word_count']} top ten words: {json_object['top_ten']}\n"
+        
+    return output

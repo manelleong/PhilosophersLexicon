@@ -8,7 +8,7 @@
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
-    <form action="/submit" method="post">
+    <form action="/submit" method="post" id="philosopherForm">
         <div class = "container">
             <div class = "Philosopher-group" id="western">
                 <h3>Western Philosophers</h3>
@@ -43,6 +43,46 @@
         var graphJSON = '{{ graphJSON | safe }}';
         Plotly.newPlot('graph', JSON.parse(graphJSON));
     </script>
+    <p class="pre-wrap" style="text-align: center;">{{ vocabulary }}</p>
+
+    <div class="grid">
+        <!-- Header Row -->
+        <div class="header">Philosopher</div>
+        <div class="header">Word Count</div>
+        <div class="header">Unique Word Count</div>
+        <div class="header">Top Ten Words</div>
+
+        <div class="cell">Nietzsche</div>
+        <div class="cell">34304</div>
+        <div class="cell">8454</div>
+        <div class="cell">'one' (310), 'man' (282), 'must' (257), 'life' (232), 'even' (218), 'god' (192), 'every' (165), 'things' (160), 'would' (157), 'world' (154)</div>
+
+        <div class="cell">Kant</div>
+        <div class="cell">26582</div>
+        <div class="cell">6270</div>
+        <div class="cell">'war' (294), 'peace' (281), 'state' (279), 'may' (184), 'right' (180), 'one' (174), 'law' (172), 'would' (167), 'nature' (149), 'nations' (134)</div>
+        
+        <div class="cell">Plato</div>
+        <div class="cell">32231</div>
+        <div class="cell">5789</div>
+        <div class="cell">'one' (305), 'body' (239), 'nature' (218), 'fire' (203), 'earth' (182), 'world' (178), 'plato' (176), 'air' (175), 'soul' (174), 'us' (169)</div>
+
+        <div class="cell">Confucius</div>
+        <div class="cell">14051</div>
+        <div class="cell">3077</div>
+        <div class="cell">'said' (622), 'master' (518), 'chap' (498), 'man' (231), 'may' (140), 'one' (113), 'virtue' (107), 'asked' (101), 'superior' (94), 'people' (93)</div>
+
+        <div class="cell">Lao Tzu</div>
+        <div class="cell">4592</div>
+        <div class="cell">1840</div>
+        <div class="cell">'tao' (85), 'things' (56), 'one' (48), 'great' (42), 'therefore' (40), 'men' (40), 'heaven' (36), 'would' (36), 'thus' (33), 'without' (32)</div>
+
+        <div class="cell">Sun Tzu</div>
+        <div class="cell">10777</div>
+        <div class="cell">2954</div>
+        <div class="cell">'enemy' (222), 'war' (137), 'ground' (105), 'general' (101), 'army' (97), 'said' (83), 'men' (75), 'pg' (73), 'attack' (73), 'victory' (73)</div>
+        
+    </div>
 
     <footer>
         <p>* With 'Even Chunking' enabled, the graph will plot an equal number of points for each philosopher (determined by the 'Chunk Count'). 

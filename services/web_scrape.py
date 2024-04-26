@@ -2,6 +2,9 @@
 from bs4 import BeautifulSoup
 import re
 import urllib.request
+import json
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
 
 # {'philosopher_name' : ['url1', 'url2', ...]}
 urlsDict = {
@@ -41,3 +44,33 @@ for philosopher, urls in urlsDict.items():
 
     with open('data/'+philosopher+'/'+philosopher+'.txt', 'w', encoding='utf8') as file:
         file.write(total_text)
+
+    stop_words = set(stopwords.words('english'))
+
+    words = word_tokenize(text)
+
+    words = [word for word in words if word not in stop_words]
+    unique_words = set(words)
+    word_frequencies = dict()
+
+    for w in words:
+        if w != " ":
+            if w not in word_frequencies.keys():
+                word_frequencies[w] = 1
+            else:
+                word_frequencies[w] += 1
+
+    sorted_words = sorted(word_frequencies, key = word_frequencies.get, reverse = True)
+
+    lexical_diversity = len(unique_words) / len(words)
+
+    top_ten_string = ""
+    for w in sorted_words[:10]:
+        top_ten_string += f" '{w}' ({word_frequencies[w]}),"
+    
+    text_data = {'word_count':len(words), 'unique_word_count':len(unique_words), 'top_ten':top_ten_string}
+
+    json_object = json.dumps(text_data, indent = 4)
+
+    with open('data/'+philosopher+'/'+philosopher+'.json', 'w', encoding='utf8') as file:
+        file.write(json_object)

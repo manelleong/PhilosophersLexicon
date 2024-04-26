@@ -21,7 +21,36 @@ form {
 }
 
 footer {
+    text-align: center;
     padding: 20px;
-    position: absolute;
     bottom: 0;
-  }
+}
+
+.pre-wrap {
+    white-space: pre-wrap;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Creates a four-column layout */
+    gap: 1px; /* Represents the grid line size */
+    background-color: #000; /* Grid lines color */
+}
+
+.header {
+    background-color: #ddd; /* Header cells background color */
+    padding: 8px;
+    text-align: center;
+}
+
+.cell {
+    background-color: #fff; /* Content cells background color */
+    padding: 8px;
+    text-align: center;
+}
+
+.excel-like {
+    width: 100%;
+    border-collapse: collapse; /* Eliminates the space between the borders */
+}
+
