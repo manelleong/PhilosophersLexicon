@@ -2,8 +2,10 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 
 from sklearn.decomposition import PCA
 
-# from nltk.corpus import stopwords
+from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
+
+import nltk
 
 import pandas as pd
 
@@ -12,6 +14,8 @@ import plotly.graph_objs as go
 
 import json
 
+nltk.download('stopwords')
+nltk.download('punkt')
 
 def chunkify(text, length):
     tokenized_text = text.split(" ")
@@ -32,8 +36,7 @@ def evenchunkify(text, chunk_count):
     return chunks
 
 def makeGraph(selected_philosophers, selected_settings):
-    # stop_words = set(stopwords.words('english'))
-    stop_words = {'why', 'doesn', 'doing', 'haven', 'mightn', 'theirs', "shouldn't", 'shouldn', 'couldn', "won't", 'is', 'and', "that'll", 'isn', "aren't", 'into', 'does', 'up', 'o', 'while', 'these', 'or', 'about', 'here', 'nor', 'hasn', 'me', "couldn't", "haven't", 'under', 'not', 'i', 'how', 'an', 'aren', 'there', 'own', 'their', 'out', 'all', 'wasn', "weren't", 'be', 'we', "doesn't", 'didn', "didn't", 'down', 'such', 'him', "it's", 'same', 'so', 'was', "mightn't", 'hers', "hadn't", 'as', 'her', 'them', 'did', 'having', 'to', 'were', 'any', 'those', 'very', 'y', 'at', 'more', 'our', 'after', 'other', 'his', "don't", 'from', 'both', 'of', 'it', 'a', 'whom', 'no', 'll', 'themselves', 'will', 'during', 're', 'most', 'too', 'she', 'against', 'what', 'then', 'had', 'yourselves', 'my', 'has', 'before', 'with', 'ourselves', 'am', 'until', 'have', "you'd", 'when', 't', 'they', 'your', 'only', 'if', 'been', 'through', 'myself', 'are', 'the', 'on', 'each', 'can', 'just', 'don', 'wouldn', 'do', 'needn', "you'll", 'in', 'm', 'than', 'ours', 'where', 's', 'you', 'mustn', "wasn't", 'weren', 'hadn', 'over', 'being', 'once', 'few', "hasn't", 've', 'but', 'some', 'for', 'between', 'below', "should've", "isn't", 'above', 'now', "mustn't", 'he', 'further', "needn't", "shan't", 'ain', 'should', "you're", 'yourself', 'itself', 'd', 'shan', 'yours', 'its', 'off', 'which', "she's", 'won', 'again', 'because', "wouldn't", 'ma', 'this', 'herself', 'by', 'himself', "you've", 'who', 'that'}
+    stop_words = set(stopwords.words('english'))
 
     authors = []
     texts = []
