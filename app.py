@@ -36,4 +36,4 @@ def submit():
 
     return render_template('index.html', graphJSON = graphjson, vocabulary = f"Vocabulary: [{vocab}]")
 
-app.run(host = "0.0.0.0", port = 80)
+# app.run(host = "0.0.0.0", port = 80)
